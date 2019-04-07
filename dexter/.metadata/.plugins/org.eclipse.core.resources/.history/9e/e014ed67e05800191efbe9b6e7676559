@@ -1,0 +1,31 @@
+package com.dexter.lib.utils;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+public class CreateDriver {
+public static void getDriverInstance()
+{
+	WebDriver driver=null;
+	String browser = DataHandlers.getDataFromProperties("execution_info", "browser").toLowerCase();
+	if (browser.equals("chrome"))
+			{
+		System.setProperty("webdriver.chrome.driver", "./browser-servers/chromedriver.exe");
+		driver = new ChromeDriver();
+			}
+	else if (browser.equals("firefox"))
+	{
+System.setProperty("webdriver.gecko.driver", "./browser-servers/geckodriver.exe");
+driver = new FirefoxDriver();
+	}
+	if (browser.equals("ie"))
+	{
+System.setProperty("webdriver.ie.driver", "./browser-servers/iedriver.exe");
+driver = new InternetExplorerDriver();
+	}
+	driver.manage().window().maximize();
+	
+}
+}
